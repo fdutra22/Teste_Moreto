@@ -11,7 +11,7 @@ $(document).ready(function () {
         $('#formCadastro #Logradouro').val(obj.Logradouro);
         $('#formCadastro #Telefone').val(obj.Telefone);
         $('#formCadastro #Cpf').val(obj.Cpf);
-        $('#formCadastro #IdCliente').val(obj.Id);
+        $('#formCadastro #idCliente').val(obj.Id);
     }
 
    
@@ -57,6 +57,7 @@ $(document).ready(function () {
     $("#cadastroBeneficiario").submit(function (e) {
         e.preventDefault();
 
+        var idCliente = $("#idCliente").val();
         $.ajax({
             url: urlPostBeneficiario,
             method: "POST",
@@ -64,7 +65,7 @@ $(document).ready(function () {
                 "NOME": $(this).find("#NomeB").val(),
                 "Cpf": $(this).find("#CpfB").val(),
                 "Id": $(this).find("#idB").val(),
-                "IdCliente": $(this).find("#idCliente").val()
+                "IdCliente": idCliente
             },
             error:
                 function (r) {
@@ -84,11 +85,15 @@ $(document).ready(function () {
 })
 
 function GetBeneficiario() {
+
+    var idCliente = $("#idCliente").val();
     $.ajax({
         url: urlBeneficiatioList,
-        type: "POST",
+        type: "GET",
         contentType: "application/json; charset=utf-8",
-        data: "{}",
+        data: {
+            "CPF": idCliente
+        },
         dataType: "json",
         success: function (data) {
             var row = "";
