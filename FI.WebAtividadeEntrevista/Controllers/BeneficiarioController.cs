@@ -161,8 +161,8 @@ namespace WebAtividadeEntrevista.Controllers
             }
         }
 
-        [HttpPost]
-        public JsonResult ListaBeneficiarios()
+        [HttpGet]
+        public JsonResult ListaBeneficiarios(string cpf)
         {
             try
             {
@@ -171,9 +171,10 @@ namespace WebAtividadeEntrevista.Controllers
 
                 List<Beneficiario> clientes = new BoBeneficiario().Pesquisa(0, 10, "NOME", true, out qtd).ToList();
 
+                var retorno = clientes.Where(x => x.IdCliente == int.Parse(cpf)).ToList();
                 //Return result to jTable
                 //return Json(new { Result = "OK", Records = clientes, TotalRecordCount = qtd });
-                return Json(clientes, JsonRequestBehavior.AllowGet);
+                return Json(retorno, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

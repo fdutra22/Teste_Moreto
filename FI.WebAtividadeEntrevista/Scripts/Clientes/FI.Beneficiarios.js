@@ -49,11 +49,15 @@ $(document).ready(function () {
 });
 
 function GetBeneficiario() {
+    var idCliente = $("#idCliente").val();
+    
     $.ajax({
         url: urlBeneficiatioList,
-        type: "POST",
+        type: "GET",
         contentType: "application/json; charset=utf-8",
-        data: "{}",
+        data: {
+            "CPF": idCliente
+        },
         dataType: "json",
         success: function (data) {
             var row = "";
