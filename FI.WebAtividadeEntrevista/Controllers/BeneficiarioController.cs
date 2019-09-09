@@ -1,3 +1,4 @@
+
 ﻿using FI.AtividadeEntrevista.BLL;
 using WebAtividadeEntrevista.Models;
 using System;
@@ -182,4 +183,5 @@ namespace WebAtividadeEntrevista.Controllers
             }
         }
     }
+>>>>>>> f2cf02bf0ed88c4da77c87dec1b6f9763cf1fa7a
 }
