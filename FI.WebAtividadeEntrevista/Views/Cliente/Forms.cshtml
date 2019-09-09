@@ -18,7 +18,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="Cpf">CPF:</label>
-                <input required="required" type="text" class="form-control mascara-cpfcnpj"  id="Cpf" name="Cpf" placeholder="Ex.: 000.001.002-00" maxlength="18" >
+                <input required="required" type="text" class="form-control mascara-cpfcnpj"  id="Cpf" name="Cpf" placeholder="Ex.: 000.001.002-00" maxlength="18" onKeyPress="mascara(this, formatarCpf)" >
             </div>
         </div>
         <div class="col-md-6">
@@ -122,7 +122,7 @@
                             <div class="form-group">
 
                                 <label for="Cpf">Cpf:</label>
-                                <input required="required" type="text" class="form-control" id="CpfB" name="CpfB" placeholder="Ex.: 000.001.002-00" maxlength="20">
+                                <input required="required" type="text" class="form-control" id="CpfB" name="CpfB" placeholder="Ex.: 000.001.002-00" maxlength="20" onKeyPress="mascara(this, formatarCpf)">
 
                             </div>
 
@@ -162,3 +162,24 @@
 
     </div>
 </div>
+
+<script>
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+
+    function formatarCpf(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        //de novo (para o segundo bloco de números)
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+        return v
+    }
+</script>
